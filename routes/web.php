@@ -12,7 +12,7 @@
 */
 
 
-Route::get('/', [ "uses"=>"BlogController@index",]);
+Route::get('/', [ "uses"=>"BlogController@index", "as"=>"blog"]);
 
 Route::get('/post', function () {
     return view('postPage');

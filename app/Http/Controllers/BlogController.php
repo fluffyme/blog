@@ -16,6 +16,7 @@ class BlogController extends Controller
 //            ->latest()
                 //scope
             ->LatestFirst()
+            ->published()
             ->simplepaginate($this->limit);
         return view("blogList", compact("posts"));
 //        dd(\DB::getQueryLog());
