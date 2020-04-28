@@ -12,8 +12,11 @@
 */
 
 
-Route::get('/', [ "uses"=>"BlogController@index", "as"=>"blog"]);
+Route::get('/blog', [ "uses"=>"BlogController@index", "as"=>"blog"]);
 
-Route::get('/post', function () {
-    return view('postPage');
-});
+Route::get('/blog/{post}', [
+    "uses"=> "BlogController@show",
+    "as"=>"blog.show"
+]);
+
+
