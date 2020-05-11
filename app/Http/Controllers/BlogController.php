@@ -30,7 +30,6 @@ class BlogController extends Controller
 
         $categoryName = $category->title;
 
-//        \DB::enableQueryLog();
         $posts = $category
             ->posts()
             ->with('author')
@@ -38,14 +37,10 @@ class BlogController extends Controller
             ->published()
             ->simplepaginate($this->limit);
         return view("blogList", compact("posts", "categoryName"));
-//        dd(\DB::getQueryLog());
     }
 
     public function author(User $author) {
-
-        $authorName = $author->name;
-
-//        \DB::enableQueryLog();
+        $authorName = $author->name;;
         $posts = $author
             ->posts()
             ->with('category')
@@ -53,13 +48,11 @@ class BlogController extends Controller
             ->published()
             ->simplepaginate($this->limit);
         return view("blogList", compact("posts", "authorName"));
-//        dd(\DB::getQueryLog());
     }
 
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::findOrFail($id);
-//        dd($post);
+        $post->increment("views");
         return view('postPage', compact("post"));
     }
 }

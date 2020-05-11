@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Category;
+use App\Views\Composers\NavigationComposer;
 use Illuminate\Support\ServiceProvider;
 
 class BlogServiceProvider extends ServiceProvider
@@ -24,13 +24,6 @@ class BlogServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('sidebar', function($view){
-
-            $categories = Category::with(['posts'=> function($q){
-                $q->published();
-            }])->orderBy('title',"asc")->get();
-
-            return $view->with('categories', $categories);
-        });
+        view()->composer('sidebar', NavigationComposer::class);
     }
 }
