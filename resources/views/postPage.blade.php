@@ -11,7 +11,6 @@
                 <div class="post-item-body">
                     <div class="padding-10">
                         <h1>{{$post->title}}</h1>
-
                         <div class="post-meta no-border">
                             <ul class="post-meta-group">
                                 <li><i class="fa fa-user"></i><a href="#"> {{$post->author->name}}</a></li>
@@ -26,7 +25,6 @@
                     </div>
                 </div>
             </article>
-
             <article class="post-author padding-10">
                 <div class="media">
                     <div class="media-left">
@@ -35,11 +33,12 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading"><a href="#">{{$post->author->name}}</a></h4>
+                        <h4 class="media-heading"><a href="{{route("author", $post->author->slug)}}">{{$post->author->name}}</a></h4>
                         <div class="post-author-count">
-                            <a href="#">
+                            <a href="{{route("author", $post->author->slug)}}">
                                 <i class="fa fa-clone"></i>
-                                90 posts
+                                @php $postCount = $post->author->posts->count() @endphp
+                                {{ @$postCount }} {{str_plural('post', $postCount)}}
                             </a>
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad aut sunt cum, mollitia
@@ -49,7 +48,6 @@
                 </div>
             </article>
             {{--        comments here--}}
-
         </div>
         @include('sidebar')
     </div>
